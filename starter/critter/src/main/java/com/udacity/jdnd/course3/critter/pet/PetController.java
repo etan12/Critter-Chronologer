@@ -41,7 +41,10 @@ public class PetController {
 
     @GetMapping
     public List<PetDTO> getPets(){
-        throw new UnsupportedOperationException();
+        List<Pet> pets = petService.getPets();
+        return pets.stream()
+                .map(pet -> convertPetToPetDTO(pet))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/owner/{ownerId}")
